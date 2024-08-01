@@ -43,8 +43,7 @@
 				<th>Paid Amount</th>
                 <th>Remaining Amount</th>
 				
-                <!--<th class="hide-column">Total Amount</th>-->
-				<th>BorrowedAmount</th>
+                <th>Total Amount</th>
                 <!--<th>Money ID</th>-->
             </tr>
         </thead>
@@ -53,11 +52,10 @@
             <tr th:each="payment : ${paymentList}">
                 <td th:text="${payment.payment_id}">ID</td>
 				<td th:text="${payment.name}">Name</td>
-				<td th:text="${#dates.format(payment.date, 'dd/MM/yyyy')}">date</td>
+				 <td th:text="${payment.date}">Date</td>
                 <td th:text="${payment.paid_amount}">Paid Amount</td>
                 <td th:text="${payment.remainingAmount}">Remaining Amount</td>
-                <!--<td class="hide-column" th:text="${payment.totalAmount}">Total Amount</td>-->
-				<td th:text="${payment.borrowedAmount}">BorrowedAmount</td>
+                <td th:text="${payment.totalAmount}">Total Amount</td>
                <!-- <td th:text="${payment.money.id}">Money ID</td>-->
             </tr>
         </tbody>

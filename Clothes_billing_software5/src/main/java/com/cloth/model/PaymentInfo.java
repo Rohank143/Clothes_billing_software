@@ -22,7 +22,7 @@ public class PaymentInfo {
     private Long payment_id;
 
     private String name;
-    
+    private String borrowedAmount;
    
 
 	private String paid_amount;
@@ -35,11 +35,22 @@ public class PaymentInfo {
     private Money_b money;
 
     // Getters and setters
+    
+    
+    
     public Long getPayment_id() {
         return payment_id;
     }
 
-    public void setPayment_id(Long payment_id) {
+    public String getBorrowedAmount() {
+		return borrowedAmount;
+	}
+
+	public void setBorrowedAmount(String borrowedAmount) {
+		this.borrowedAmount = borrowedAmount;
+	}
+
+	public void setPayment_id(Long payment_id) {
         this.payment_id = payment_id;
     }
 
