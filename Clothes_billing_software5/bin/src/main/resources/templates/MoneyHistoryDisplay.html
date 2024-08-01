@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Money History</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h2>Payment History</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+				<th>Name</th>
+                <th>Date</th>
+				<th>Paid Amount</th>
+                <th>Remaining Amount</th>
+				
+                <th>Total Amount</th>
+                <!--<th>Money ID</th>-->
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Iterate over the list of PaymentInfo objects -->
+            <tr th:each="payment : ${paymentList}">
+                <td th:text="${payment.payment_id}">ID</td>
+				<td th:text="${payment.name}">Name</td>
+				 <td th:text="${payment.date}">Date</td>
+                <td th:text="${payment.paid_amount}">Paid Amount</td>
+                <td th:text="${payment.remainingAmount}">Remaining Amount</td>
+                <td th:text="${payment.totalAmount}">Total Amount</td>
+               <!-- <td th:text="${payment.money.id}">Money ID</td>-->
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

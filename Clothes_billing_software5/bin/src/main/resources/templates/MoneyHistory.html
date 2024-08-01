@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Money Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"], input[type="date"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="text"]:read-only {
+            background-color: #e9ecef;
+        }
+        input[type="submit"] {
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            width: 100%;
+        }
+        input[type="submit"]:hover {
+            background-color: #218838;
+        }
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <h2>Edit Money Details</h2>
+    <form th:action="@{/editMoney/{id}(id=${money_b.id})}" method="post" th:object="${money_b}">
+        <!-- Hidden fields -->
+        <div class="form-group">
+            <input type="hidden" th:field="*{id}"/>
+        </div>
+        
+        <!-- Name field -->
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" th:field="*{name}" readonly />
+        </div>
+
+        <!-- Paid Amount field -->
+        <div class="form-group">
+            <label for="paid_amount">Paid Amount:</label>
+            <input type="text" id="paid_amount" name="paidAmount" th:field="*{paidAmount}" oninput="calculateTotal()" />
+        </div>
+
+        <!-- Remaining Amount field -->
+        <div class="form-group">
+            <label for="remainingAmount">Remaining Amount:</label>
+            <input type="text" id="remaining_amount" name="remainingAmount" th:field="*{remainingAmount}" readonly />
+        </div>
+
+        <!-- Total Amount field -->
+        <div class="form-group">
+            <label for="totalAmount">Total Amount:</label>
+            <input type="text" id="total_amount" name="totalAmount" th:field="*{totalAmount}" readonly />
+        </div>
+
+        <!-- Date field -->
+        <div class="form-group">
+            <label for="date">Date:</label>
+            <input type="date" id="date" th:field="*{date}" th:required="true" />
+        </div>
+
+        <!-- Submit button -->
+        <div class="form-group">
+            <input type="submit" value="Submit" />
+        </div>
+    </form>
+
+    
+
+       
+    
+</body>
+</html>
