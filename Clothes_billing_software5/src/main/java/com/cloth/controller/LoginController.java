@@ -61,7 +61,7 @@ public class LoginController {
 		Worker worker = workerRepository.findByEmail(username);
 
 		if (worker != null && worker.getPassword().equals(password)) {
-			return "Dashboard.html";
+			return "workerDashboard";
 		} else {
 			model.addAttribute("error", "Invalid username or password");
 			return "workerlogin";

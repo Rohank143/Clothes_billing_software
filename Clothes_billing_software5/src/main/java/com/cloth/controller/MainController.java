@@ -50,6 +50,16 @@ public class MainController {
 	public String dashboard() {
 		return "Dashboard";
 	}
+	
+	@GetMapping("/Dashboard_login")
+    public String login() {
+        return "Dashboard_login";
+    }
+	
+	@GetMapping("/workerDashboard")
+	public String workerdashboard() {
+		return "workerlogin";
+	}
 
 	@GetMapping("/stockForm")
 	public String showStockForm(Model model) {
@@ -98,6 +108,13 @@ public class MainController {
 		List<Customer> customerList = cus_impl.getAllCustomer(); // Example: Fetching customer data from service
 		model.addAttribute("customerList", customerList);
 		return "Cust_display.html"; // Thymeleaf template name
+	}
+	
+	@GetMapping("/Customerss")
+	public String getCustomerList1(Model model) {
+		List<Customer> customerList = cus_impl.getAllCustomer(); // Example: Fetching customer data from service
+		model.addAttribute("customerList", customerList);
+		return "Cust_displayWorker.html"; // Thymeleaf template name
 	}
 
 	@GetMapping("/editCustomer/{id}")
@@ -233,12 +250,21 @@ public class MainController {
 		model.addAttribute("TailorList", TailorList);
 		return "showTailor"; //template name
 	}
-
-	@PostMapping("/deleteTailo/{id}")
-	public String deleteTailor(@PathVariable("id") Long id, @ModelAttribute("customer") Customer updatedCustomer) {
-		service_t.deleteTailor(id); // Implement this method in service
-		return "redirect:/showTailor"; // Redirect to customer list after update
+	
+	@GetMapping("/showTailorWorker")
+	public String getTailorList1(Model model) {
+		List<Tailor> TailorList = service_t.getAllTailor(); // Example: Fetching customer data from service
+		model.addAttribute("TailorList", TailorList);
+		return "showTailorWorker.html"; //template name
 	}
+
+	@GetMapping("/deleteTailor/{id}")
+	public String deleteTailor(@PathVariable("id") Long id) {
+	    service_t.deleteTailor(id); // Ensure this method is correctly implemented in your service
+	    return "redirect:/showTailor"; // Redirect to the tailor list after deletion
+	}
+
+
 
 	@GetMapping("/editTailor/{id}")
 	public String showEditTailorForm(@PathVariable Long id, Model model) {
