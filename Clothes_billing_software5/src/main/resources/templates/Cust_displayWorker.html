@@ -9,6 +9,7 @@
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
             margin: 20px;
+            position: relative; /* Allow absolute positioning of child elements */
         }
         h2 {
             color: #333;
@@ -73,6 +74,23 @@
             background-color: #f44336;
             color: white;
         }
+        .btn-back {
+            position: absolute; /* Position it absolutely */
+            top: 20px; /* Adjust top position */
+            right: 20px; /* Adjust right position */
+            display: inline-block;
+            padding: 8px 12px;
+            text-decoration: none;
+            background-color: #2196F3;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+        .btn-back:hover {
+            background-color: #1976D2;
+        }
 		.btn {
 		         display: inline-block;
 		         padding: 8px 12px;
@@ -84,32 +102,15 @@
 		         cursor: pointer;
 		         text-align: center;
 		     }
-			 .btn-back {
-			             position: fixed;
-			             top: 20px;
-			             right: 20px;
-			             background-color: #2196F3;
-			             color: white;
-			             padding: 10px 20px;
-			             border: none;
-			             border-radius: 5px;
-			             cursor: pointer;
-			             font-size: 16px;
-			             text-decoration: none;
-			             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-			             transition: background-color 0.3s ease;
-			         }
     </style>
     <script>
         function searchFunction() {
-            // Declare variables
             var input, filter, table, tr, td, i, txtValue;
             input = document.getElementById("searchInput");
             filter = input.value.toUpperCase();
             table = document.getElementById("customerTable");
             tr = table.getElementsByTagName("tr");
 
-            // Loop through all table rows, and hide those who don't match the search query
             for (i = 0; i < tr.length; i++) {
                 td = tr[i].getElementsByTagName("td")[1]; // Column index for customer name
 
@@ -171,12 +172,20 @@
                 tr[i].style.display = "";
             }
         }
+
+        function goBack() {
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                window.location.href = '/defaultPage'; // Replace with your default page URL
+            }
+        }
     </script>
 </head>
 <body>
     <h2>Customer List</h2>
 	<!-- Back Button -->
-		  <a href="#" onclick="window.history.back();" class="btn back-button">Back</a>
+			  <a href="#" onclick="window.history.back();" class="btn back-button">Back</a>
     <div class="search-container">
         <input type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search by customer name...">
     </div>
@@ -185,6 +194,9 @@
         <a href="#" class="non-active-button" onclick="showNonActiveCustomers()">Non-Active Customers</a>
         <a href="#" onclick="showAllCustomers()">Show All</a>
     </div>
+    
+    
+    
     <table id="customerTable">
         <thead>
             <tr>
@@ -214,7 +226,6 @@
                 <td th:text="${#dates.format(customer.customer_date, 'dd/MM/yyyy')}"></td>
                 <td>
                     <a th:href="@{/editCustomer/{id}(id=${customer.customer_id})}" style="display: inline-block; padding: 8px 12px; text-decoration: none; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; text-align: center;">Edit</a>
-                    <a th:href="@{/deleteCustomer/{id}(id=${customer.customer_id})}" onclick="return confirm('Are you sure you want to delete?')" style="display: inline-block; padding: 8px 12px; text-decoration: none; background-color: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer; text-align: center;">Delete</a>
                 </td>
             </tr>
         </tbody>

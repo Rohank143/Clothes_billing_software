@@ -95,6 +95,8 @@
 </head>
 <body>
     <h2>Money Details</h2>
+	<!-- Back Button -->
+			  <a href="#" onclick="window.history.back();" class="btn back-button">Back</a>
     <div class="search-container">
         <input type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search by customer name...">
     </div>
@@ -125,6 +127,7 @@
                 <td class="hide-column" th:text="${money_b.totalAmount}"></td>
                 <td th:text="${#dates.format(money_b.date, 'dd/MM/yyyy')}"></td>
                 <td th:text="${money_b.reason}"></td>
+				
                 <td>
                     <a th:href="@{/editMoney/{id}(id=${money_b.id})}" class="btn btn-primary">Update</a>
                 </td>
@@ -134,6 +137,6 @@
             </tr>
         </tbody>
     </table>
-	<a href="#" onclick="window.history.back();" class="btn back-button">Back to List</a>
+	
 </body>
 </html>

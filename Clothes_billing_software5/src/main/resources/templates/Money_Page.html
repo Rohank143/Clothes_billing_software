@@ -66,6 +66,9 @@
 </head>
 <body>
     <h2>Money Form</h2>
+	<!-- Back Button -->
+			  <a href="#" onclick="window.history.back();" class="btn back-button">Back</a>
+	
     <div id="Money_b">
         <form th:action="@{/submit_money}" method="post">
             
@@ -98,7 +101,7 @@
             <input type="submit" value="Submit">
         </form>
 		
-		<a href="#" onclick="window.history.back();" class="btn back-button">Back to List</a>
+		
     </div>
 	
 	

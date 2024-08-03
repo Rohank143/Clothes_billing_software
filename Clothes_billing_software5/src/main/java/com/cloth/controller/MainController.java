@@ -174,6 +174,10 @@ public class MainController {
         return "MoneyHistory.html"; // Thymeleaf template name for edit money details form
     }
 	
+	
+	
+	
+	
 //	@GetMapping("/paymentHistory")
 //	public String viewPaymentHistory(Model model) {
 //	    List<PaymentInfo> paymentList = payment_Repo.findAll();
@@ -191,6 +195,8 @@ public class MainController {
 	    
 	    return "redirect:/money_bs"; // Redirect to view payment history after update
 	}
+	
+
 	
 	  @GetMapping("/paymentHistory")
 	    public String viewPaymentHistory(@RequestParam(value = "moneyId", required = false) Long moneyId, Model model) {

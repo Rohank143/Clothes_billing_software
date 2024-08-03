@@ -30,38 +30,79 @@
         a:hover {
             text-decoration: underline;
         }
+        .total-row {
+            font-weight: bold;
+        }
+		
+		.btn {
+						         display: inline-block;
+						         padding: 8px 12px;
+						         text-decoration: none;
+						         background-color: #4CAF50;
+						         color: white;
+						         border: none;
+						         border-radius: 4px;
+						         cursor: pointer;
+						         text-align: center;
+						     }
+		
     </style>
 </head>
 <body>
     <h2>Payment History</h2>
-    <table>
+	<!-- Back Button -->
+			  <a href="#" onclick="window.history.back();" class="btn back-button">Back</a>
+    <table id="paymentTable">
         <thead>
             <tr>
                 <th>ID</th>
-				<th>Name</th>
+                <th>Name</th>
                 <th>Date</th>
-				<th>Paid Amount</th>
+                <th>Paid Amount</th>
                 <th>Remaining Amount</th>
-				
-                <!--<th class="hide-column">Total Amount</th>-->
-				<th>BorrowedAmount</th>
-                <!--<th>Money ID</th>-->
+                <th>Borrowed Amount</th>
             </tr>
         </thead>
         <tbody>
             <!-- Iterate over the list of PaymentInfo objects -->
             <tr th:each="payment : ${paymentList}">
                 <td th:text="${payment.payment_id}">ID</td>
-				<td th:text="${payment.name}">Name</td>
-				<td th:text="${#dates.format(payment.date, 'dd/MM/yyyy')}">date</td>
+                <td th:text="${payment.name}">Name</td>
+                <td th:text="${#dates.format(payment.date, 'dd/MM/yyyy')}">date</td>
                 <td th:text="${payment.paid_amount}">Paid Amount</td>
                 <td th:text="${payment.remainingAmount}">Remaining Amount</td>
-                <!--<td class="hide-column" th:text="${payment.totalAmount}">Total Amount</td>-->
-				<td th:text="${payment.borrowedAmount}">BorrowedAmount</td>
-               <!-- <td th:text="${payment.money.id}">Money ID</td>-->
+                <td th:text="${payment.borrowedAmount}">Borrowed Amount</td>
             </tr>
         </tbody>
+        <tfoot>
+            <tr class="total-row">
+                <td colspan="3">Total Paid Amount:</td>
+                <td id="totalPaidAmount">0</td>
+                <td colspan="2"></td>
+            </tr>
+        </tfoot>
     </table>
-	<a href="#" onclick="window.history.back();" class="btn-back">Back to List</a>
+
+    
+
+    <script>
+        // JavaScript to calculate total paid amount
+        function calculateTotalPaidAmount() {
+            const table = document.getElementById('paymentTable');
+            const rows = table.querySelectorAll('tbody tr');
+            let total = 0;
+
+            rows.forEach(row => {
+                const paidAmountCell = row.querySelector('td:nth-child(4)');
+                const paidAmount = parseFloat(paidAmountCell.textContent.replace(/,/g, '')) || 0;
+                total += paidAmount;
+            });
+
+            document.getElementById('totalPaidAmount').textContent = total.toFixed(2);
+        }
+
+        // Call the function to calculate total when the page loads
+        window.onload = calculateTotalPaidAmount;
+    </script>
 </body>
 </html>
