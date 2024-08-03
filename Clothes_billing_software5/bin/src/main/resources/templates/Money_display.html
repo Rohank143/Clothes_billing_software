@@ -67,6 +67,9 @@
         .btn-primary {
             background-color: #007bff;
         }
+        .hide-column {
+            display: none;
+        }
     </style>
     <script>
         function searchFunction() {
@@ -92,6 +95,8 @@
 </head>
 <body>
     <h2>Money Details</h2>
+	<!-- Back Button -->
+			  <a href="#" onclick="window.history.back();" class="btn back-button">Back</a>
     <div class="search-container">
         <input type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search by customer name...">
     </div>
@@ -102,9 +107,9 @@
                 <th>Name</th>
                 <th>Address</th>
                 <th>Borrowed Amount</th>
-               <!-- <th>Paid Amount</th>-->
+                <!-- <th>Paid Amount</th> -->
                 <th>Remaining Amount</th>
-                <th>Total Amount</th>
+                <th class="hide-column">Total Amount</th>
                 <th>Date</th>
                 <th>Reason</th>
                 <th>Edit</th>
@@ -117,20 +122,21 @@
                 <td th:text="${money_b.name}"></td>
                 <td th:text="${money_b.address}"></td>
                 <td th:text="${money_b.borrowedAmount}"></td>
-              <!-- <td type="hidden" th:text="${money_b.paidAmount}"></td>-->
+                <!-- <td type="hidden" th:text="${money_b.paidAmount}"></td> -->
                 <td th:text="${money_b.RemainingAmount}"></td>
-                <td th:text="${money_b.totalAmount}"></td>
+                <td class="hide-column" th:text="${money_b.totalAmount}"></td>
                 <td th:text="${#dates.format(money_b.date, 'dd/MM/yyyy')}"></td>
                 <td th:text="${money_b.reason}"></td>
+				
                 <td>
                     <a th:href="@{/editMoney/{id}(id=${money_b.id})}" class="btn btn-primary">Update</a>
                 </td>
-				<td>
-				    <a th:href="@{/paymentHistory(moneyId=${money_b.id})}" class="btn">View Payment History</a>
-				</td>
-				</td>
+                <td>
+                    <a th:href="@{/paymentHistory(moneyId=${money_b.id})}" class="btn">View Payment History</a>
+                </td>
             </tr>
         </tbody>
     </table>
+	
 </body>
 </html>
