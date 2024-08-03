@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
         crossorigin="anonymous">
         <link rel="stylesheet"href="style.css">
-		
 </head>
 <style>
 	img{
@@ -39,7 +38,7 @@
         onmouseover="openSide('side-nav')">
         <div class="side-title side-content d-flex ">
             <img id="user-img" class="user-icon" src="/tailor-icon.jpg" alt="user icon">
-            <span class="collapse width align-self-center text-light" style="min-width: 70%;padding-left: 5%">Admin</span>
+            <span class="collapse width align-self-center text-light" style="min-width: 70%;padding-left: 5%">User Name</span>
         </div>
         <div class="list-group list-group-flush w-100 side-icons">
             <a  th:href="@{/CustomerForm}" class="list-group-item d-flex justify-content-start align-items-center bg-light">
@@ -47,27 +46,19 @@
                <span class="collapse width align-top side-options">Add User</span>
 				 
             </a>
-			<a th:href="@{/Customers}" class="list-group-item d-flex justify-content-start align-items-center bg-light">
-			        <span class="fa fa-users fa-m" style="color: black;"></span>
-			        <span class="collapse width align-top side-options">Customer List</span>
-			    </a>
-			<a th:href="@{/Money_b}" class="list-group-item d-flex justify-content-start align-items-center bg-light">
-			       <span class="fas fa-money-bill fa-m" style="color: black;"></span>
-			       <span class="collapse width align-top side-options">Money</span>
-			   </a>
-			   <a th:href="@{/money_bs}" class="list-group-item d-flex justify-content-start align-items-center bg-light">
-			           <span class="fas fa-wallet fa-m" style="color: black;"></span>
-			           <span class="collapse width align-top side-options">Money Details</span>
-			       </a>
+            <a th:href="@{/Customerss}"class="list-group-item d-flex justify-content-start align-items-center bg-light">
+                <span class="fa fa-plus-square fa-m" style="color: black;"></span>
+                <span class="collapse width align-top side-options">Customer Search</span>
+            </a>
 
-				   <a th:href="@{/tailorform}" class="list-group-item d-flex justify-content-start align-items-center bg-light">
-				          <span class="fas fa-clipboard-list fa-m" style="color:black;"></span>
-				          <span class="collapse width align-top side-options">Tailor Form</span>
-				      </a>
-					  <a th:href="@{/showTailor}" class="list-group-item d-flex justify-content-start align-items-center bg-light">
-					         <span class="fas fa-list fa-m" style="color: black;"></span>
-					         <span class="collapse width align-top side-options">Tailor List</span>
-					     </a>
+            <a th:href="@{/tailorform}" class="list-group-item d-flex justify-content-start align-items-center bg-light">
+                <span class="fas fa-code fa-m " style="color: green;"></span>
+                <span class="collapse width align-top side-options">Tailor Form</span>
+            </a>
+            <a th:href="@{/showTailorWorker}" class="list-group-item d-flex justify-content-start align-items-center bg-light">
+                <span class="fas fa-code fa-m " style="color: grey;"></span>
+                <span class="collapse width align-top side-options">Tailor List</span>
+            </a>
             
             <a th:href="@{/Dashboard_login}" class="list-group-item d-flex justify-content-start align-items-center bg-light mt-auto">
                 <span class="fas fa-sign-out-alt fa-m" style="color: red;"></span>
