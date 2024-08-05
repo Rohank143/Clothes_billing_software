@@ -8,12 +8,14 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
-            margin: 20px;
-            position: relative; /* Added for positioning the back button */
+            margin: 0;
+            padding: 0;
+            position: relative; /* Allows positioning of the button */
         }
         h2 {
             color: #333;
             text-align: center;
+            margin-top: 20px;
         }
         table {
             width: 100%;
@@ -21,6 +23,7 @@
             border: 1px solid #ddd;
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
         }
         th, td {
             padding: 12px;
@@ -45,6 +48,7 @@
         .search-container {
             text-align: right;
             margin-bottom: 10px;
+            margin-top: 20px;
         }
         .search-container input[type=text] {
             padding: 8px;
@@ -55,35 +59,38 @@
             box-sizing: border-box;
         }
         .back-button {
-             /* Position the button fixed at the bottom-right */
+            position: fixed;
             bottom: 20px;
             right: 20px;
             background-color: #4CAF50;
             color: white;
-            padding: 10px 20px;
             border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            border-radius: 50%;
+            padding: 15px;
             text-align: center;
+            cursor: pointer;
+            font-size: 16px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s, transform 0.3s;
         }
         .back-button:hover {
             background-color: #45a049;
+            transform: scale(1.1);
+        }
+        .back-button:active {
+            background-color: #397d39;
         }
     </style>
     <script>
         function searchFunction() {
-            // Declare variables
             var input, filter, table, tr, td, i, txtValue;
             input = document.getElementById("searchInput");
             filter = input.value.toUpperCase();
             table = document.getElementById("tailorTable");
             tr = table.getElementsByTagName("tr");
 
-            // Loop through all table rows, and hide those who don't match the search query
             for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[1]; // Column index for customer name
+                td = tr[i].getElementsByTagName("td")[1];
 
                 if (td) {
                     txtValue = td.textContent || td.innerText;
@@ -98,7 +105,6 @@
     </script>
 </head>
 <body>
-	
     <h2>Tailor List</h2>
 	<!-- Back Button -->
 			  <a href="#" onclick="window.history.back();" class="btn back-button">Back</a>
@@ -121,7 +127,6 @@
             </tr>
         </thead>
         <tbody>
-            <!-- Loop through each customer -->
             <tr th:each="tailor : ${TailorList}">
                 <td th:text="${tailor.tailor_id}"></td>
                 <td th:text="${tailor.tailor_name}"></td>
@@ -134,11 +139,10 @@
                 <td th:text="${#dates.format(tailor.date, 'dd/MM/yyyy')}"></td>
                 <td class="action-links">
                     <a th:href="@{/editTailor/{id}(id=${tailor.tailor_id})}" style="display: inline-block; padding: 8px 12px; text-decoration: none; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; text-align: center;">Edit</a>
-                    <a th:href="@{/deleteTailor/{id}(id=${tailor.tailor_id})}" onclick="return confirm('Are you sure you want to delete?')" style="display: inline-block; padding: 8px 12px; text-decoration: none; background-color: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer; text-align: center;">Delete</a>
                 </td>
             </tr>
         </tbody>
     </table>
-    
+   
 </body>
 </html>

@@ -51,10 +51,24 @@
         input[type="submit"]:hover {
             background-color: #45a049;
         }
+		.btn {
+		         display: inline-block;
+		         padding: 8px 12px;
+		         text-decoration: none;
+		         background-color: #4CAF50;
+		         color: white;
+		         border: none;
+		         border-radius: 4px;
+		         cursor: pointer;
+		         text-align: center;
+		     }
     </style>
 </head>
 <body>
     <h2>Money Form</h2>
+	<!-- Back Button -->
+			  <a href="#" onclick="window.history.back();" class="btn back-button">Back</a>
+	
     <div id="Money_b">
         <form th:action="@{/submit_money}" method="post">
             
@@ -86,6 +100,8 @@
             
             <input type="submit" value="Submit">
         </form>
+		
+		
     </div>
 	
 	

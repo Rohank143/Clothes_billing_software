@@ -62,6 +62,7 @@ public class Money_b_service {
 	            existingMoney.setDate(updatedMoney.getDate());
 	            existingMoney.setName(updatedMoney.getName());
 	            existingMoney.setBorrowedAmount(updatedMoney.getBorrowedAmount());
+	            existingMoney.setAdditionalMoney(updatedMoney.getAdditionalMoney());
 	            
 	            // Save updated Money_b
 	            money_repo.save(existingMoney);
@@ -76,6 +77,7 @@ public class Money_b_service {
 	            payment.setDate(updatedMoney.getDate());
 	            payment.setName(updatedMoney.getName());
 	            payment.setBorrowedAmount(updatedMoney.getBorrowedAmount());
+	            payment.setAdditionalMoney(updatedMoney.getAdditionalMoney());
 	            paymentRepo.save(payment);
 	        }
 	    }

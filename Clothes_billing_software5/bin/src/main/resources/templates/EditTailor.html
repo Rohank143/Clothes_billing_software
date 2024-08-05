@@ -8,6 +8,7 @@
             font-family: Arial, sans-serif;
             background-color: #f2f2f2;
             padding: 20px;
+            position: relative; /* Ensure the back button can be positioned absolutely */
         }
         h2 {
             color: #333;
@@ -43,10 +44,43 @@
         input[type="submit"]:hover {
             background-color: #45a049;
         }
+        .btn-back {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .btn-back:hover {
+            background-color: #0056b3;
+        }
+		.btn-back {
+		            position: fixed;
+		            top: 20px;
+		            right: 20px;
+		            background-color: #2196F3;
+		            color: white;
+		            padding: 10px 20px;
+		            border: none;
+		            border-radius: 5px;
+		            cursor: pointer;
+		            font-size: 16px;
+		            text-decoration: none;
+		            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+		            transition: background-color 0.3s ease;
+		        }
     </style>
 </head>
 <body>
+    
     <h2>Edit Tailor</h2>
+	<!-- Back Button -->
+			  <a href="#" onclick="window.history.back();" class="btn back-button">Back</a>
     <form th:action="@{/updateTailor/{id}(id=${tailor.tailor_id})}" method="post" th:object="${tailor}">
         <input type="hidden" th:field="*{tailor_id}">
         <p>Name: <input type="text" th:field="*{tailor_name}"></p>
