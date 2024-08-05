@@ -33,31 +33,32 @@
         .total-row {
             font-weight: bold;
         }
-		
-		.btn {
-						         display: inline-block;
-						         padding: 8px 12px;
-						         text-decoration: none;
-						         background-color: #4CAF50;
-						         color: white;
-						         border: none;
-						         border-radius: 4px;
-						         cursor: pointer;
-						         text-align: center;
-						     }
-		
+        
+        .btn {
+            display: inline-block;
+            padding: 8px 12px;
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+        }
+        
     </style>
 </head>
 <body>
     <h2>Payment History</h2>
-	<!-- Back Button -->
-			  <a href="#" onclick="window.history.back();" class="btn back-button">Back</a>
+    <!-- Back Button -->
+    <a href="#" onclick="window.history.back();" class="btn back-button">Back</a>
     <table id="paymentTable">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Name</th>
                 <th>Date</th>
+                <th>Add Money</th>
                 <th>Paid Amount</th>
                 <th>Remaining Amount</th>
                 <th>Borrowed Amount</th>
@@ -69,6 +70,7 @@
                 <td th:text="${payment.payment_id}">ID</td>
                 <td th:text="${payment.name}">Name</td>
                 <td th:text="${#dates.format(payment.date, 'dd/MM/yyyy')}">date</td>
+                <td th:text="${payment.additionalMoney}">Add Money</td>
                 <td th:text="${payment.paid_amount}">Paid Amount</td>
                 <td th:text="${payment.remainingAmount}">Remaining Amount</td>
                 <td th:text="${payment.borrowedAmount}">Borrowed Amount</td>
@@ -76,14 +78,12 @@
         </tbody>
         <tfoot>
             <tr class="total-row">
-                <td colspan="3">Total Paid Amount:</td>
-                <td id="totalPaidAmount">0</td>
+                <td colspan="4">Total Paid Amount:</td>
+                <td id="totalPaidAmount">0.00</td>
                 <td colspan="2"></td>
             </tr>
         </tfoot>
     </table>
-
-    
 
     <script>
         // JavaScript to calculate total paid amount
@@ -93,7 +93,7 @@
             let total = 0;
 
             rows.forEach(row => {
-                const paidAmountCell = row.querySelector('td:nth-child(4)');
+                const paidAmountCell = row.querySelector('td:nth-child(5)'); // Update to the correct column index (5 for Paid Amount)
                 const paidAmount = parseFloat(paidAmountCell.textContent.replace(/,/g, '')) || 0;
                 total += paidAmount;
             });

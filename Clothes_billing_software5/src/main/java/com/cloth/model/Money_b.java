@@ -27,10 +27,14 @@ public class Money_b {
     private String totalAmount;
     private Date date;
     private String reason;
+    
+    private String additionalMoney;
 
     // Getters and setters
   
-
+    
+    
+    
     public String getName() {
         return name;
     }
@@ -102,4 +106,15 @@ public class Money_b {
     public void setReason(String reason) {
         this.reason = reason;
     }
+
+	public String getAdditionalMoney() {
+		return additionalMoney;
+	}
+
+	public void setAdditionalMoney(String additionalMoney) {
+		this.additionalMoney = additionalMoney;
+	}
+    
+    
+    
 }

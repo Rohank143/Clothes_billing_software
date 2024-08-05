@@ -58,23 +58,23 @@
         .form-group:last-child {
             margin-bottom: 0;
         }
-		.btn {
-						         display: inline-block;
-						         padding: 8px 12px;
-						         text-decoration: none;
-						         background-color: #4CAF50;
-						         color: white;
-						         border: none;
-						         border-radius: 4px;
-						         cursor: pointer;
-						         text-align: center;
-						     }
+        .btn {
+            display: inline-block;
+            padding: 8px 12px;
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
     <h2>Edit Money Details</h2>
-	<!-- Back Button -->
-			  <a href="#" onclick="window.history.back();" class="btn back-button">Back</a>
+    <!-- Back Button -->
+    <a href="#" onclick="window.history.back();" class="btn back-button">Back</a>
     <form id="moneyForm" th:action="@{/editMoney/{id}(id=${money_b.id})}" method="post" th:object="${money_b}" onsubmit="return handleFormSubmit(event)">
         <div class="form-group">
             <input type="hidden" th:field="*{id}"/>
@@ -87,7 +87,7 @@
         
         <div class="form-group">
             <label for="additionalMoney">Additional Money:</label>
-            <input type="text" id="additionalMoney" name="additionalMoney" />
+            <input type="text" id="additionalMoney" name="additionalMoney" th:field="*{additionalMoney}" />
         </div>
 
         <div class="form-group">
@@ -119,87 +119,89 @@
         </div>
     </form>
     
-    
-    <script>
-        // Ensure that Paid Amount starts at 0 every time
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById("paid_amount").value = "0";
-        });
+	<script>
+	    document.addEventListener('DOMContentLoaded', function() {
+	        // Ensure Paid Amount and Additional Money start at 0 when the page loads
+	        document.getElementById("paid_amount").value = "0";
+	        document.getElementById("additionalMoney").value = "0";
+	    });
 
-        function handleFormSubmit(event) {
-            const additionalMoneyInput = document.getElementById("additionalMoney");
-            const paidAmountInput = document.getElementById("paid_amount");
+	    function handleFormSubmit(event) {
+	        const additionalMoneyInput = document.getElementById("additionalMoney");
+	        const paidAmountInput = document.getElementById("paid_amount");
 
-            const additionalMoney = parseFloat(additionalMoneyInput.value) || 0;
-            const paidAmount = parseFloat(paidAmountInput.value) || 0;
+	        const additionalMoney = parseFloat(additionalMoneyInput.value) || 0;
+	        const paidAmount = parseFloat(paidAmountInput.value) || 0;
 
-            // Check if both Additional Money and Paid Amount are zero
-            if (additionalMoney <= 0 && paidAmount <= 0) {
-                // Prevent form submission
-                event.preventDefault();
+	        // Check if both Additional Money and Paid Amount are zero
+	        if (additionalMoney <= 0 && paidAmount <= 0) {
+	            // Prevent form submission
+	            event.preventDefault();
+	            // Display an alert message
+	            alert("Additional Money or Paid Amount must be greater than zero.");
+	            return false; // Ensure the form does not submit
+	        }
 
-                // Display an alert message
-                alert("Additional Money or Paid Amount must be greater than zero.");
-                
-                return false; // Ensure the form does not submit
-            }
+	        // Perform calculations
+	        calculateRemainingAmount();
+	        addMoney();
 
-            // Perform calculations
-            calculateRemainingAmount();
-            addMoney();
+	        // Allow the form to submit
+	        return true;
+	    }
+	    
+	    function calculateRemainingAmount() {
+	        const paidAmountInput = document.getElementById("paid_amount");
+	        const totalAmountInput = document.getElementById("total_amount");
+	        const remainingAmountInput = document.getElementById("remaining_amount");
+	        
+	        // Get the current values
+	        const paidAmount = parseFloat(paidAmountInput.value) || 0;
+	        let totalAmount = parseFloat(totalAmountInput.value) || 0;
+	        let remainingAmount = parseFloat(remainingAmountInput.value) || 0;
 
-            // Optionally, submit the form programmatically if needed
-            return true; // Allow the form to submit
-        }
-        
-        function calculateRemainingAmount() {
-            const paidAmountInput = document.getElementById("paid_amount"); 
-            const totalAmountInput = document.getElementById("total_amount");
-            const remainingAmountInput = document.getElementById("remaining_amount");
-            
-            // Get the current values
-            const paidAmount = parseFloat(paidAmountInput.value) || 0;
-            let totalAmount = parseFloat(totalAmountInput.value) || 0;
-            let remainingAmount = parseFloat(remainingAmountInput.value) || 0;
+	        // Check if the paid amount exceeds the remaining amount
+	        if (paidAmount > remainingAmount) {
+	            // Prevent form submission
+	            alert("Paid Amount cannot be greater than Remaining Amount.");
+	            return false;
+	        }
 
-            // Calculate the new remaining amount
-            const newRemainingAmount = remainingAmount - paidAmount;
+	        // Calculate the new remaining amount
+	        const newRemainingAmount = remainingAmount - paidAmount;
 
-            // Update the remaining amount input
-            remainingAmountInput.value = newRemainingAmount.toFixed(2);
+	        // Update the remaining amount input
+	        remainingAmountInput.value = newRemainingAmount.toFixed(2);
 
-            // Calculate the new total amount
-            totalAmount -= (remainingAmount - newRemainingAmount);
+	        // Calculate the new total amount
+	        totalAmount -= (remainingAmount - newRemainingAmount);
 
-            // Update the total amount input
-            totalAmountInput.value = totalAmount.toFixed(2);
-        }
+	        // Update the total amount input
+	        totalAmountInput.value = totalAmount.toFixed(2);
+	    }
 
-        function addMoney() {
-            const additionalMoneyInput = document.getElementById("additionalMoney");
-            const borrowedAmountInput = document.getElementById("borrowedAmount");
-            const totalAmountInput = document.getElementById("total_amount");
-            const remainingAmountInput = document.getElementById("remaining_amount");
+	    function addMoney() {
+	        const additionalMoneyInput = document.getElementById("additionalMoney");
+	        const borrowedAmountInput = document.getElementById("borrowedAmount");
+	        const totalAmountInput = document.getElementById("total_amount");
+	        const remainingAmountInput = document.getElementById("remaining_amount");
 
-            // Get the current values
-            const additionalMoney = parseFloat(additionalMoneyInput.value) || 0;
-            let borrowedAmount = parseFloat(borrowedAmountInput.value) || 0;
-            let totalAmount = parseFloat(totalAmountInput.value) || 0;
-            let remainingAmount = parseFloat(remainingAmountInput.value) || 0;
+	        // Get the current values
+	        const additionalMoney = parseFloat(additionalMoneyInput.value) || 0;
+	        let borrowedAmount = parseFloat(borrowedAmountInput.value) || 0;
+	        let totalAmount = parseFloat(totalAmountInput.value) || 0;
+	        let remainingAmount = parseFloat(remainingAmountInput.value) || 0;
 
-            // Update the amounts
-            totalAmount += additionalMoney;
-            borrowedAmount += additionalMoney;
-            remainingAmount += additionalMoney;
+	        // Update the amounts
+	        totalAmount += additionalMoney;
+	        borrowedAmount += additionalMoney;
+	        remainingAmount += additionalMoney;
 
-            // Update the input fields
-            totalAmountInput.value = totalAmount.toFixed(2);
-            borrowedAmountInput.value = borrowedAmount.toFixed(2);
-            remainingAmountInput.value = remainingAmount.toFixed(2);
-
-            // Reset the additional money input
-            additionalMoneyInput.value = "00";
-        }
-    </script>
+	        // Update the input fields
+	        totalAmountInput.value = totalAmount.toFixed(2);
+	        borrowedAmountInput.value = borrowedAmount.toFixed(2);
+	        remainingAmountInput.value = remainingAmount.toFixed(2);
+	    }
+	</script>
 </body>
 </html>

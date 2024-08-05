@@ -23,7 +23,7 @@ public class PaymentInfo {
 
     private String name;
     private String borrowedAmount;
-   
+    private String additionalMoney;
 
 	private String paid_amount;
     private String remainingAmount;
@@ -42,7 +42,15 @@ public class PaymentInfo {
         return payment_id;
     }
 
-    public String getBorrowedAmount() {
+    public String getAdditionalMoney() {
+		return additionalMoney;
+	}
+
+	public void setAdditionalMoney(String additionalMoney) {
+		this.additionalMoney = additionalMoney;
+	}
+
+	public String getBorrowedAmount() {
 		return borrowedAmount;
 	}
 
