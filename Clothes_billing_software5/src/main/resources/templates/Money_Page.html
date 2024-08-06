@@ -46,32 +46,45 @@
             border-radius: 4px;
             cursor: pointer;
             font-size: 16px;
-            margin-left: 130px; /* Ensure button aligns with input fields */
+            margin-left: 300px;
+            margin-top: 11px; /* Ensure button aligns with input fields */
         }
         input[type="submit"]:hover {
             background-color: #45a049;
         }
-		.btn {
-		         display: inline-block;
-		         padding: 8px 12px;
-		         text-decoration: none;
-		         background-color: #4CAF50;
-		         color: white;
-		         border: none;
-		         border-radius: 4px;
-		         cursor: pointer;
-		         text-align: center;
-		     }
+        .btn {
+            position: absolute;
+            top: 2vw;
+            display: inline-block;
+            padding: 8px 12px;
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
+
+    <div id="google_translate_element" class="form-control" style="position: absolute; right: 1vw ;"></div>
+
+    <!-- Include Google Translate script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
     <h2>Money Form</h2>
-	<!-- Back Button -->
-			  <a href="#" onclick="window.history.back();" class="btn back-button">Back</a>
-	
+    <!-- Back Button -->
+    <a href="#" onclick="window.history.back();" class="btn back-button">Back</a>
+
     <div id="Money_b">
-        <form th:action="@{/submit_money}" method="post">
-            
+        <form th:action="@{/submit_money}" method="post" onsubmit="return showAlert()">
             <input type="hidden" id="id" name="id" readonly><br>
             
             <label for="name">Name:</label>
@@ -80,17 +93,17 @@
             <label for="address">Address:</label>
             <input type="text" id="address" name="address" th:required="true"><br>
             
-			<label for="borrowedAmount">Borrowed Amount:</label>
-			<input type="text" id="borrowedAmount" name="borrowedAmount" th:required="true" oninput="calculateTotal()"><br>
+            <label for="borrowedAmount">Borrowed Amount:</label>
+            <input type="text" id="borrowedAmount" name="borrowedAmount" th:required="true" oninput="calculateTotal()"><br>
 
-			<label for="paidAmount">Paid Amount:</label>
-			<input type="text" id="paidAmount" name="paidAmount" th:required="true" oninput="calculateTotal()"><br>
-			
-			<label for="remainingAmount">Remaining Amount:</label>
-			<input type="text" id="remainingAmount" name="remainingAmount" th:required="true" readonly><br>
+            <label for="paidAmount">Paid Amount:</label>
+            <input type="text" id="paidAmount" name="paidAmount" th:required="true" oninput="calculateTotal()"><br>
+            
+            <label for="remainingAmount">Remaining Amount:</label>
+            <input type="text" id="remainingAmount" name="remainingAmount" th:required="true" readonly><br>
 
-			<label for="totalAmount">Total Amount:</label>
-			<input type="text" id="totalAmount" name="totalAmount" th:required="true" readonly><br>
+            <label for="totalAmount">Total Amount:</label>
+            <input type="text" id="totalAmount" name="totalAmount" th:required="true" readonly><br>
             
             <label for="date">Date:</label>
             <input type="date" id="date" name="date" th:required="true"><br>
@@ -100,29 +113,28 @@
             
             <input type="submit" value="Submit">
         </form>
-		
-		
     </div>
-	
-	
-	<script>
-	    function calculateTotal() {
-	        // Get the values of borrowedAmount and paidAmount
-	        var borrowedAmount = parseFloat(document.getElementById('borrowedAmount').value) || 0;
-	        var paidAmount = parseFloat(document.getElementById('paidAmount').value) || 0;
-	        
-	        // Calculate the total amount
-	        var totalAmount = borrowedAmount;
-			
-			var remainingAmount =  borrowedAmount - paidAmount
-			
-	         
-	        // Update the value of totalAmount input field
-	        document.getElementById('totalAmount').value = totalAmount.toFixed(2); // Adjust to your formatting needs
-			document.getElementById('remainingAmount').value = remainingAmount.toFixed(2);
-			
-	    }
-	</script>
+
+    <script>
+        function calculateTotal() {
+            // Get the values of borrowedAmount and paidAmount
+            var borrowedAmount = parseFloat(document.getElementById('borrowedAmount').value) || 0;
+            var paidAmount = parseFloat(document.getElementById('paidAmount').value) || 0;
+            
+            // Calculate the total amount
+            var totalAmount = borrowedAmount;
+            var remainingAmount = borrowedAmount - paidAmount;
+             
+            // Update the value of totalAmount input field
+            document.getElementById('totalAmount').value = totalAmount.toFixed(2); // Adjust to your formatting needs
+            document.getElementById('remainingAmount').value = remainingAmount.toFixed(2);
+        }
+
+        function showAlert() {
+            alert('Form submitted successfully!');
+            return true; // Allow form to be submitted
+        }
+    </script>
 
 </body>
 </html>
