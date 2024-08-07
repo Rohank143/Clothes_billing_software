@@ -6,59 +6,126 @@
     <title>Cloth Shop Dashboard</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         /* Custom styles for the dashboard */
         body {
-            background-color: #f8f9fa;
-            font-family: Arial, sans-serif;
+            background-color: #e9ecef;
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
         .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 20px;
+            max-width: 800px;
+            padding: 30px;
             background-color: #ffffff;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            text-align: center;
         }
         .card {
-            margin-bottom: 20px;
             border: none;
-            box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
         }
         .card-header {
-            background-color: #007bff;
+            background: linear-gradient(135deg, #ff6f61, #ff3d00);
             color: #ffffff;
-            padding: 15px;
-            border-bottom: 2px solid #0056b3;
-            border-radius: 6px 6px 0 0;
+            padding: 20px;
+            border-bottom: 0;
+            font-size: 1.75rem;
+            font-weight: 700;
         }
         .card-body {
-            padding: 20px;
+            padding: 30px;
         }
-        .btn {
+        .btn-primary {
+            background-color: #ff6f61;
+            border: none;
+            padding: 14px 28px;
             font-size: 16px;
-            font-weight: bold;
-            border-radius: 2px;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #ff3d00;
+        }
+        .btn-admin {
+            background-color: #17a2b8;
+            color: #ffffff;
+        }
+        .btn-admin:hover {
+            background-color: #138496;
+        }
+        .btn-employee {
+            background-color: #fd7e14;
+            color: #ffffff;
+        }
+        .btn-employee:hover {
+            background-color: #e06c00;
+        }
+        .welcome-text {
+            margin-bottom: 30px;
+        }
+        .welcome-text h5 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .welcome-text p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .login-section {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+        .login-section:hover {
+            background-color: #f8f9fa;
+        }
+        .admin-login {
+            background-color: #d1ecf1;
+        }
+        .employee-login {
+            background-color: #fff3cd;
+        }
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="mb-0">Cloth Shop Dashboard</h4>
-                    </div>
-                    <div class="card-body">
-                        <!-- Add your dashboard content here -->
-                        <h5>Welcome, Admin!</h5>
-                        <p>This is your cloth shop dashboard.</p>
-                        <p>You can manage your products, orders, and customers here.</p>
-                        <a href="/login" class="btn btn-primary">Admin Login</a>
-                        <a href="/workerlogin" class="btn btn-primary">Employee Login</a>
-                        
-                    </div>
+        <div class="card">
+            <div class="card-header">
+               LOGIN PAGE
+            </div>
+            <div class="card-body">
+            
+            <div class="welcome-text">
+                    <h5>Welcome, Hindavi Men's wear!</h5>
+                    <p>This is your cloth shop dashboard where you can manage products, orders, and customers efficiently.</p>
+                </div>
+                
+                <div class="login-section admin-login">
+                    <div class="section-title">Admin</div>
+                    <a href="/login" class="btn btn-admin">Admin Login</a>
+                </div>
+                <div class="login-section employee-login mt-4">
+                    <div class="section-title">Employee</div>
+                    <a href="/workerlogin" class="btn btn-employee">Employee Login</a>
                 </div>
             </div>
         </div>

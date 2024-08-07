@@ -1,85 +1,70 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Customer Form</title>
+    <title>Edit Customer</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #F2F2F2;
+            background-color: #f2f2f2;
             padding: 20px;
-        }
-        #customerForm {
-            max-width: 600px;
-            margin: auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 0;
         }
         h2 {
-            text-align: center;
             color: #333;
+            text-align: center;
         }
-        label {
-            font-weight: bold;
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            margin: 0 auto;
         }
-        input[type="text"],
-        input[type="number"],
-        textarea,
-        select {
-            width: 100%;
-            padding: 8px;
+        p {
             margin-bottom: 10px;
+        }
+        input[type="text"] {
+            width: calc(100% - 6px);
+            padding: 8px;
             border: 1px solid #ccc;
             border-radius: 4px;
             box-sizing: border-box;
         }
-        button[type="submit"] {
-			position: absolute;
-			left: 63vw;
-			top: 78vh;
-			
+        input[type="submit"] {
             background-color: #4CAF50;
             color: white;
             padding: 10px 20px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            float: right;
+            font-size: 16px;
         }
-        button[type="submit"]:hover {
-            background-color: #45A049;
+        input[type="submit"]:hover {
+            background-color: #45a049;
         }
-        .success-message {
-            display: none;
-            background-color: #4CAF50;
+        .btn-back {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #2196F3;
             color: white;
-            text-align: center;
-            padding: 10px;
-            margin-top: 10px;
-            border-radius: 4px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
         }
-        .error-message {
-            color: red;
-            margin-top: 5px;
-        }
-        .alert {
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid transparent;
-            border-radius: 4px;
-        }
-        .alert-danger {
-            color: #721C24;
-            background-color: #F8D7DA;
-            border-color: #F5C6CB;
+        .btn-back:hover {
+            background-color: #0b79d0;
         }
 		.btn {
-			position: absolute;
-			top: 2vw;
-				         
+				         display: inline-block;
+				         padding: 8px 12px;
 				         text-decoration: none;
 				         background-color: #4CAF50;
 				         color: white;
@@ -88,20 +73,6 @@
 				         cursor: pointer;
 				         text-align: center;
 				     }
-					 .btn1{
-					 			position: absolute;
-					 			top: 2vh;
-					 			display: inline-block;
-					 				           padding: 8px 12px;
-					 				           text-decoration: none;
-					 				           background-color: #4CAF50;
-					 				           color: white;
-					 				           border: none;
-					 				           border-radius: 4px;
-					 				           cursor: pointer;
-					 				           text-align: center;
-					 			
-					 		   }
     </style>
 </head>
 <body>
@@ -119,92 +90,77 @@
 			
 			
 			
-    <h2>Customer Information Form</h2>
 	<!-- Back Button -->
-				<a href="#" onclick="window.history.back();" class="btn1 back-button">Back</a>
-    <div id="customerForm">
-        <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
-            <span th:text="${errorMessage}"></span>
-        </div>
-        <form th:object="${customer}" method="post" action="#" th:action="@{/SaveCustomer}" onsubmit="return validateForm() && showSuccessMessage(event)">
-            <input type="hidden" th:field="*{customer_id}">
-            <label for="customerName">Name:</label>
-            <input type="text" id="customerName" th:field="*{customer_name}" required><br>
-            
-            <label for="customerState">State:</label>
-            <select id="stateSelect" th:field="*{Customer_State}" onchange="populateCities()">
-                <option value="">Select a state</option>
-                <option value="Andhra Pradesh">Andhra Pradesh</option>
-                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                <option value="Assam">Assam</option>
-                <option value="Bihar">Bihar</option>
-                <option value="Chhattisgarh">Chhattisgarh</option>
-                <option value="Goa">Goa</option>
-                <option value="Gujarat">Gujarat</option>
-                <option value="Haryana">Haryana</option>
-                <option value="Himachal Pradesh">Himachal Pradesh</option>
-                <option value="Jharkhand">Jharkhand</option>
-                <option value="Karnataka">Karnataka</option>
-                <option value="Kerala">Kerala</option>
-                <option value="Madhya Pradesh">Madhya Pradesh</option>
-                <option value="Maharashtra">Maharashtra</option>
-                <option value="Manipur">Manipur</option>
-                <option value="Meghalaya">Meghalaya</option>
-                <option value="Mizoram">Mizoram</option>
-                <option value="Nagaland">Nagaland</option>
-                <option value="Odisha">Odisha</option>
-                <option value="Punjab">Punjab</option>
-                <option value="Rajasthan">Rajasthan</option>
-                <option value="Sikkim">Sikkim</option>
-                <option value="Tamil Nadu">Tamil Nadu</option>
-                <option value="Telangana">Telangana</option>
-                <option value="Tripura">Tripura</option>
-                <option value="Uttar Pradesh">Uttar Pradesh</option>
-                <option value="Uttarakhand">Uttarakhand</option>
-                <option value="West Bengal">West Bengal</option>
-                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-                <option value="Chandigarh">Chandigarh</option>
-                <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
-                <option value="Daman and Diu">Daman and Diu</option>
-                <option value="Delhi">Delhi</option>
-                <option value="Lakshadweep">Lakshadweep</option>
-                <option value="Puducherry">Puducherry</option>
-            </select>
-            
-            <label for="customerCity">City:</label>
-            <select id="citySelect" th:field="*{Customer_City}">
-                <option value="">Select a city</option>
-            </select>
+			  <a href="#" onclick="window.history.back();" class="btn back-button">Back</a>
+    <h2>Edit Customer</h2>
+    <form th:action="@{/updateCustomer1/{id}(id=${customer.customer_id})}" method="post" th:object="${customer}" onsubmit="showSuccessMessage(event)">
+        <input type="hidden" th:field="*{customer_id}">
+        <p>Name: <input type="text" th:field="*{customer_name}"></p>
+		 <p><label for="customerState">State:</label> </p>
+		            <select id="stateSelect" th:field="*{Customer_State}" onchange="populateCities()">
+		                <option value="">Select a state</option>
+		                <option value="Andhra Pradesh">Andhra Pradesh</option>
+		                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+		                <option value="Assam">Assam</option>
+		                <option value="Bihar">Bihar</option>
+		                <option value="Chhattisgarh">Chhattisgarh</option>
+		                <option value="Goa">Goa</option>
+		                <option value="Gujarat">Gujarat</option>
+		                <option value="Haryana">Haryana</option>
+		                <option value="Himachal Pradesh">Himachal Pradesh</option>
+		                <option value="Jharkhand">Jharkhand</option>
+		                <option value="Karnataka">Karnataka</option>
+		                <option value="Kerala">Kerala</option>
+		                <option value="Madhya Pradesh">Madhya Pradesh</option>
+		                <option value="Maharashtra">Maharashtra</option>
+		                <option value="Manipur">Manipur</option>
+		                <option value="Meghalaya">Meghalaya</option>
+		                <option value="Mizoram">Mizoram</option>
+		                <option value="Nagaland">Nagaland</option>
+		                <option value="Odisha">Odisha</option>
+		                <option value="Punjab">Punjab</option>
+		                <option value="Rajasthan">Rajasthan</option>
+		                <option value="Sikkim">Sikkim</option>
+		                <option value="Tamil Nadu">Tamil Nadu</option>
+		                <option value="Telangana">Telangana</option>
+		                <option value="Tripura">Tripura</option>
+		                <option value="Uttar Pradesh">Uttar Pradesh</option>
+		                <option value="Uttarakhand">Uttarakhand</option>
+		                <option value="West Bengal">West Bengal</option>
+		                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+		                <option value="Chandigarh">Chandigarh</option>
+		                <option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
+		                <option value="Daman and Diu">Daman and Diu</option>
+		                <option value="Delhi">Delhi</option>
+		                <option value="Lakshadweep">Lakshadweep</option>
+		                <option value="Puducherry">Puducherry</option>
+		            </select>
+					
+					 <p><label for="customerCity">City:</label> </p>
+					           <select id="citySelect" th:field="*{Customer_City}">
+					               <option value="">Select a city</option>
+					           </select>
+		
+        <p>Address: <input type="text" th:field="*{customer_address}"></p>
+		
+        <p>Mobile Number: <input type="text" th:field="*{customer_mobileNo}"></p>
+        <p>Type: <input type="text" th:field="*{customer_type}"></p>
+        <p>Date: <input type="text" th:field="*{customer_date}"></p>
+		<p>Active And Inactive :<select id="active" th:field="*{active_type}">
+		               <option value="Active">Active</option>
+		               <option value="Inactive">Inactive</option>
+		           </select></p>
+        <p><input type="submit" value="Save Changes"></p>
+    </form>
+</body>
 
-            <label for="customerAddress">Address:</label>
-            <input type="text" id="customerAddress" th:field="*{customer_address}"><br>
-            <label for="customerMobileNo">Mobile Number:</label>
-            <input type="text" id="customerMobileNo" th:field="*{customer_mobileNo}" onblur="checkPhoneNumber()"><br>
-            <span id="phoneError" class="error-message"></span><br>
-            <label for="customerType">Type:</label>
-            <select id="customerType" th:field="*{customer_type}">
-                <option value="Regular">Regular</option>
-                <option value="Premium">New</option>
-            </select><br>
-            
-       
-            
-            <label for="customerDate">Date:</label>
-            <input type="date" id="customerDate" th:field="*{customer_date}"><br>
-            <button type="submit">Save</button>
-        </form>
-    
-        <div class="success-message" id="successMessage">
-            Customer saved successfully!
-        </div>
-    </div>
-    <script th:inline="javascript">
-        function populateCities() {
-            var stateSelect = document.getElementById("stateSelect");
-            var citySelect = document.getElementById("citySelect");
-            var state = stateSelect.value;
+<script th:inline="javascript">
+       function populateCities() {
+           var stateSelect = document.getElementById("stateSelect");
+           var citySelect = document.getElementById("citySelect");
+           var state = stateSelect.value;
 
-            citySelect.innerHTML = '<option value="">Select a city</option>';
+           citySelect.innerHTML = '<option value="">Select a city</option>';
 
 			var citiesByState = {
 			    "Andhra Pradesh": ["Visakhapatnam", "Vijayawada", "Guntur", "Nellore", "Kurnool", "Rajahmundry", "Tirupati", "Kakinada", "Anantapur", "Vizianagaram", "Eluru", "Ongole", "Srikakulam", "Chittoor", "Kadapa", "Proddatur", "Adoni", "Tenali", "Hindupur", "Bhimavaram"],
@@ -245,48 +201,38 @@
 			};
 
 
-            var cities = citiesByState[state] || [];
 
-            for (var i = 0; i < cities.length; i++) {
-                var option = document.createElement("option");
-                option.value = cities[i];
-                option.text = cities[i];
-                citySelect.appendChild(option);
-            }
-        }
+			    var cities = citiesByState[state] || [];
+			    for (var i = 0; i < cities.length; i++) {
+			        var option = document.createElement("option");
+			        option.value = cities[i];
+			        option.text = cities[i];
+			        citySelect.appendChild(option);
+			    }
 
-        function checkPhoneNumber() {
-            var phoneInput = document.getElementById("customerMobileNo");
-            var phoneError = document.getElementById("phoneError");
-            var phoneNumber = phoneInput.value;
-            var phonePattern = /^[0-9]{10}$/;
+			    // Set the previously selected city
+			    var selectedCity = /*[[${customer.Customer_City}]]*/ "";
+			    if (selectedCity) {
+			        citySelect.value = selectedCity;
+			    }
+			}
 
-            if (!phonePattern.test(phoneNumber)) {
-                phoneError.textContent = "Invalid phone number. Please enter a 10-digit number.";
-                phoneInput.classList.add("error");
-                return false;
-            } else {
-                phoneError.textContent = "";
-                phoneInput.classList.remove("error");
-                return true;
-            }
-        }
+			// Initialize the cities dropdown on page load
+			window.onload = function() {
+			    populateCities();
+			};
+			
+			function showSuccessMessage(event) {
+			            // Prevent the default form submission
+			            event.preventDefault();
 
-        function validateForm() {
-            return checkPhoneNumber();
-        }
+			            // Display the success message
+			            alert("Data submitted successfully!");
+
+			            // You can manually submit the form here if needed
+			            event.target.submit();
+			        }
+        
 		
-		
-		function showSuccessMessage(event) {
-		            // Prevent the default form submission
-		            event.preventDefault();
-
-		            // Display the success message
-		            alert("Data submitted successfully!");
-
-		            // You can manually submit the form here if needed
-		            event.target.submit();
-		        }
-    </script>
-</body>
+		</script>
 </html>

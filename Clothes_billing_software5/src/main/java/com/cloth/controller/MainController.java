@@ -33,6 +33,9 @@ public class MainController {
 
     @Autowired
     private Customer_Service_impl customerService;
+    
+    @Autowired
+	private Customer_Service_impl cus_impl;
 
     @Autowired
     private Money_b_service moneyService;
@@ -116,11 +119,29 @@ public class MainController {
         model.addAttribute("customer", customer);
         return "EditCustomer";
     }
+    
+    @GetMapping("/editCustomer1/{id}")
+    public String showEditCustomerForm1(@PathVariable Long id, Model model) {
+        Customer customer = customerService.getCustomerById(id);
+        if (customer == null) {
+            throw new RuntimeException("Customer not found with id: " + id);
+        }
+        model.addAttribute("customer", customer);
+        return "EditCustomer1";
+    }
+    
+    
 
     @PostMapping("/updateCustomer/{id}")
     public String updateCustomer(@PathVariable("id") Long id, @ModelAttribute("customer") Customer updatedCustomer) {
         customerService.updateCustomer(updatedCustomer);
         return "redirect:/Customers";
+    }
+    
+    @PostMapping("/updateCustomer1/{id}")
+    public String updateCustomer1(@PathVariable("id") Long id, @ModelAttribute("customer") Customer updatedCustomer) {
+        customerService.updateCustomer(updatedCustomer);
+        return "redirect:/Customerss";
     }
 
     @GetMapping("/deleteCustomer/{id}")
@@ -225,6 +246,45 @@ public class MainController {
     @PostMapping("/updateTailor/{id}")
     public String updateTailor(@PathVariable("id") Long id, @ModelAttribute("tailor") Tailor updatedTailor) {
         tailorService.updateTailor(updatedTailor);
+        return "redirect:/showTailorWorker";
+    }
+    
+    
+    @GetMapping("/editTailor1/{id}")
+    public String showEditTailorForm1(@PathVariable Long id, Model model) {
+        Tailor tailor = tailorService.getTailorById(id);
+        if (tailor == null) {
+            throw new RuntimeException("Tailor not found with id: " + id);
+        }
+        model.addAttribute("tailor", tailor);
+        return "EditTailor1";
+    }
+
+    @PostMapping("/updateTailor1/{id}")
+    public String updateTailor1(@PathVariable("id") Long id, @ModelAttribute("tailor") Tailor updatedTailor) {
+        tailorService.updateTailor(updatedTailor);
         return "redirect:/showTailor";
     }
+    
+    
+    
+    
+    
+    
+    @GetMapping("/Customerss")
+	public String getCustomerList1(Model model) {
+		List<Customer> customerList = cus_impl.getAllCustomer(); // Example: Fetching customer data from service
+		model.addAttribute("customerList", customerList);
+		return "Cust_displayWorker.html"; // Thymeleaf template name
+	}
+    
+    
+    @GetMapping("/showTailorWorker")
+    public String getTailorList1(Model model) {
+        List<Tailor> TailorList = tailorService.getAllTailor();
+        model.addAttribute("TailorList", TailorList);
+        return "showTailorWorker.html";
+    }
+    
+    
 }

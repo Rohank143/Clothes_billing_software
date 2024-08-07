@@ -74,6 +74,7 @@
 		            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 		            transition: background-color 0.3s ease;
 		        }
+				
 				.btn1 {
 								         display: inline-block;
 								         padding: 8px 12px;
@@ -85,7 +86,7 @@
 								         cursor: pointer;
 								         text-align: center;
 								     }
-				  
+				    
     </style>
 </head>
 <body>
@@ -107,7 +108,7 @@
     <h2>Edit Tailor</h2>
 	<!-- Back Button -->
 			  <a href="#" onclick="window.history.back();" class="btn1 back-button">Back</a>
-    <form th:action="@{/updateTailor/{id}(id=${tailor.tailor_id})}" method="post" th:object="${tailor}">
+    <form th:action="@{/updateTailor1/{id}(id=${tailor.tailor_id})}" method="post" th:object="${tailor}">
         <input type="hidden" th:field="*{tailor_id}">
         <p>Name: <input type="text" th:field="*{tailor_name}"></p>
         <p>Shop Name: <input type="text" th:field="*{shop_name}"></p>
