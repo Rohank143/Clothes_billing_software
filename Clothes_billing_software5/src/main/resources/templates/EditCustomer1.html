@@ -93,7 +93,7 @@
 	<!-- Back Button -->
 			  <a href="#" onclick="window.history.back();" class="btn back-button">Back</a>
     <h2>Edit Customer</h2>
-    <form th:action="@{/updateCustomer/{id}(id=${customer.customer_id})}" method="post" th:object="${customer}" onsubmit="showSuccessMessage(event)">
+    <form th:action="@{/updateCustomer1/{id}(id=${customer.customer_id})}" method="post" th:object="${customer}" onsubmit="showSuccessMessage(event)">
         <input type="hidden" th:field="*{customer_id}">
         <p>Name: <input type="text" th:field="*{customer_name}"></p>
 		 <p><label for="customerState">State:</label> </p>

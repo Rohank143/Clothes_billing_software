@@ -37,6 +37,10 @@
             box-sizing: border-box;
         }
         button[type="submit"] {
+			position: absolute;
+			left: 63vw;
+			top: 78vh;
+			
             background-color: #4CAF50;
             color: white;
             padding: 10px 20px;
@@ -73,8 +77,9 @@
             border-color: #F5C6CB;
         }
 		.btn {
-				         display: inline-block;
-				         padding: 8px 12px;
+			position: absolute;
+			top: 2vw;
+				         
 				         text-decoration: none;
 				         background-color: #4CAF50;
 				         color: white;
@@ -83,17 +88,45 @@
 				         cursor: pointer;
 				         text-align: center;
 				     }
+					 .btn1{
+					 			position: absolute;
+					 			top: 2vh;
+					 			display: inline-block;
+					 				           padding: 8px 12px;
+					 				           text-decoration: none;
+					 				           background-color: #4CAF50;
+					 				           color: white;
+					 				           border: none;
+					 				           border-radius: 4px;
+					 				           cursor: pointer;
+					 				           text-align: center;
+					 			
+					 		   }
     </style>
 </head>
 <body>
+	
+	<div id="google_translate_element" class="form-control" style="position: absolute; right: 1vw ;"></div>
+
+		    <!-- Include Google Translate script -->
+		    <script type="text/javascript">
+		        function googleTranslateElementInit() {
+		            new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+		        }
+		    </script>
+		    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+			
+			
+			
     <h2>Customer Information Form</h2>
 	<!-- Back Button -->
-				 <a href="/Dashboard" class="btn back-button">Back</a>
+				<a href="#" onclick="window.history.back();" class="btn1 back-button">Back</a>
     <div id="customerForm">
         <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
             <span th:text="${errorMessage}"></span>
         </div>
-        <form th:object="${customer}" method="post" onsubmit="return validateForm()" action="#" th:action="@{/SaveCustomer}">
+        <form th:object="${customer}" method="post" action="#" th:action="@{/SaveCustomer}" onsubmit="return validateForm() && showSuccessMessage(event)">
             <input type="hidden" th:field="*{customer_id}">
             <label for="customerName">Name:</label>
             <input type="text" id="customerName" th:field="*{customer_name}" required><br>
@@ -242,6 +275,18 @@
         function validateForm() {
             return checkPhoneNumber();
         }
+		
+		
+		function showSuccessMessage(event) {
+		            // Prevent the default form submission
+		            event.preventDefault();
+
+		            // Display the success message
+		            alert("Data submitted successfully!");
+
+		            // You can manually submit the form here if needed
+		            event.target.submit();
+		        }
     </script>
 </body>
 </html>

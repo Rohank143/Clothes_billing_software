@@ -55,7 +55,7 @@ public class Customer_Service_impl
 	            existingCustomer.setCustomer_City(updatedCustomer.getCustomer_City());
 	            existingCustomer.setCustomer_mobileNo(updatedCustomer.getCustomer_mobileNo());
 	            existingCustomer.setCustomer_type(updatedCustomer.getCustomer_type());
-	            existingCustomer.setActiveType(updatedCustomer.getActiveType());
+	            existingCustomer.setActive_type(updatedCustomer.getActive_type());
 	            existingCustomer.setCustomer_date(updatedCustomer.getCustomer_date());
 
 	            // Save the updated customer

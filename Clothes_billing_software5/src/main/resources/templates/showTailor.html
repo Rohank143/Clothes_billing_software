@@ -99,9 +99,23 @@
 </head>
 <body>
 	
+	<div id="google_translate_element" class="form-control" style="position: absolute; right: 1vw ;"></div>
+
+		    <!-- Include Google Translate script -->
+		    <script type="text/javascript">
+		        function googleTranslateElementInit() {
+		            new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+		        }
+		    </script>
+		    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+			
+			
+			
+	
     <h2>Tailor List</h2>
 	<!-- Back Button -->
-			  <a href="/Dashboard" class="btn back-button">Back</a>
+	<a href="/Dashboard" class="btn back-button">Back</a>	<div class="search-container">
     <div class="search-container">
         <input type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search by tailor name...">
     </div>
@@ -133,7 +147,7 @@
                 <td th:text="${tailor.type}"></td>
                 <td th:text="${#dates.format(tailor.date, 'dd/MM/yyyy')}"></td>
                 <td class="action-links">
-                    <a th:href="@{/editTailor/{id}(id=${tailor.tailor_id})}" style="display: inline-block; padding: 8px 12px; text-decoration: none; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; text-align: center;">Edit</a>
+                    <a th:href="@{/editTailor1/{id}(id=${tailor.tailor_id})}" style="display: inline-block; padding: 8px 12px; text-decoration: none; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; text-align: center;">Edit</a>
                     <a th:href="@{/deleteTailor/{id}(id=${tailor.tailor_id})}" onclick="return confirm('Are you sure you want to delete?')" style="display: inline-block; padding: 8px 12px; text-decoration: none; background-color: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer; text-align: center;">Delete</a>
                 </td>
             </tr>

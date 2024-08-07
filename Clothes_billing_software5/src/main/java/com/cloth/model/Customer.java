@@ -2,6 +2,8 @@ package com.cloth.model;
 
 import java.sql.Date;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,6 +23,9 @@ public class Customer
 	
 	private String Customer_State;
 	
+	@ColumnDefault("'Active'")
+	private String activeType = "Active"; // Initialize the default value here
+	
 	private String Customer_City;
 	
 	private String Customer_address;
@@ -29,7 +34,7 @@ public class Customer
 	
 	private String Customer_type;
 	
-	private String activeType;
+	
 	
 	private Date Customer_date;
 
@@ -43,7 +48,7 @@ public class Customer
 		Customer_address = customer_address;
 		mobileNumber = customer_mobileNo;
 		Customer_type = customer_type;
-		activeType=activetype;
+		activeType = "Active"; // Ensure the default value is set here
 		Customer_date = customer_date;
 	}
 	
@@ -52,21 +57,26 @@ public class Customer
 
 	public Customer() {
 		super();
-		// TODO Auto-generated constructor stub
+		activeType = "Active"; // Ensure the default value is set here
 	}
 
 
 
 
-	public String getActiveType() {
+	
+
+
+
+
+	public String getActive_type() {
 		return activeType;
 	}
 
 
 
 
-	public void setActiveType(String activetype) {
-		activeType = activetype;
+	public void setActive_type(String active_type) {
+		this.activeType = active_type;
 	}
 
 
